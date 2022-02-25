@@ -52,7 +52,12 @@ public class GrpcServer implements DisposableBean {
                 server = ServerBuilder.forPort(port).addService(ServerInterceptors.intercept(commonService, (ServerInterceptor) clazz.newInstance())).build().start();
             }
         }
-        log.info("gRPC Server started, listening on port " + server.getPort());
+
+        log.info("");
+        log.info("------------------------------------------------------------------------");
+        log.info("GRPC Server start, listening on port " + server.getPort() + ".... Success!");
+        log.info("------------------------------------------------------------------------");
+        log.info("");
         startDaemonAwaitThread();
     }
 

@@ -101,7 +101,13 @@ public class CommonService extends CommonServiceGrpc.CommonServiceImplBase {
                 serviceStringMap.put(className, bean);
             }
         } catch (BeansException e) {
-            throw new NoSuchBeanDefinitionException(className);
+            Class clazz = Class.forName(className);
+            bean = applicationContext.getBean(className);
+            if (bean!=null){
+                serviceBeanMap.put(clazz, bean);
+            }else {
+                throw new NoSuchBeanDefinitionException(className);
+            }
         }
         return bean;
     }
